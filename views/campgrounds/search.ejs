@@ -1,18 +1,24 @@
 <% layout('layouts/boilerplate')%>
-<h1>Campgrounds</h1>
-<form>
-  <label>Maximum Dollar Amount:</label>
-  <input type="number" name="maxAmount" />
-  <input type="submit" value="Submit" />
-</form>
-<% if (typeof maxAmount != 'undefined') { %>
-  <h2>Campgrounds with Prices Less Than or Equal to <%= maxAmount %></h2>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search Campgrounds</title>
+</head>
+<body>
+  <h1>Search Campgrounds</h1>
+
+  <form action="/campgrounds/search" method="GET">
+    <label for="maxPrice">Max Price:</label>
+    <input type="number" id="maxPrice" name="maxPrice" min="0" step="1">
+
+    <button type="submit">Search</button>
+  </form>
+
+  <h2>Affordable Campgrounds</h2>
   <ul>
-    <% for (var i = 0; i < campgrounds.length; i++) {
-      var campground = campgrounds[i];
-      if (campground.price <= maxAmount) { %>
-        <li><%= campground.name %> - $<%= campground.price %></li>
-      <% } %>
+    <% for (const campground of affordableCampgrounds) { %>
+      <li><%= campground.name %> - $<%= campground.price %></li>
     <% } %>
   </ul>
-<% } %>
+</body>
+</html>

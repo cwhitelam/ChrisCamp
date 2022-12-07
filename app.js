@@ -7,6 +7,7 @@ const ExpressError = require('./utils/ExpressError');
 const methodOverride = require('method-override');
 const Campground = require('./models/campground');
 
+
 mongoose.connect('mongodb://localhost:27017/chris-camp', {
 });
 
@@ -36,6 +37,13 @@ app.get('/campgrounds', async (req, res) => {
 
 app.get('/campgrounds/new', (req, res) => {
     res.render('campgrounds/new');
+})
+
+app.get('/campgrounds/search', async (req, res) => {
+    const maxPrice = req.query.maxPrice
+    const campgrounds = await Campground.find({});
+    const affordableCampgrounds = campgrounds.filter(campground => campground.price <= maxPrice);
+    res.render('campgrounds/search', { affordableCampgrounds })
 })
 
 app.post('/campgrounds', catchAsync(async (req, res, next) => {
