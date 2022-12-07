@@ -5,7 +5,7 @@
   <title>Search Campgrounds</title>
 </head>
 <body>
-  <h1>Search Campgrounds</h1>
+  <h1 class="col-6 offset-3">Search Campgrounds</h1>
 
   <form action="/campgrounds/search" method="GET">
     <label for="maxPrice">Max Price:</label>
@@ -14,10 +14,10 @@
     <button type="submit">Search</button>
   </form>
 
-  <h2>Affordable Campgrounds</h2>
+  <h2 class="col-6 offset-3">Affordable Campgrounds</h2>
   <ul>
     <% for (const campground of affordableCampgrounds) { %>
-      <li><%= campground.name %> - $<%= campground.price %></li>
+      <li><%= campground.title %> - $<%= campground.price %></li>
     <% } %>
   </ul>
 </body>

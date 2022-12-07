@@ -42,9 +42,10 @@ app.get('/campgrounds/new', (req, res) => {
 app.get('/campgrounds/search', async (req, res) => {
     const maxPrice = req.query.maxPrice
     const campgrounds = await Campground.find({});
+    console.log(campgrounds)
     const affordableCampgrounds = campgrounds.filter(campground => campground.price <= maxPrice);
     res.render('campgrounds/search', { affordableCampgrounds })
-})
+});
 
 app.post('/campgrounds', catchAsync(async (req, res, next) => {
     const campground = new Campground(req.body.campground);
