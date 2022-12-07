@@ -1,0 +1,18 @@
+<% layout('layouts/boilerplate')%>
+<h1>Campgrounds</h1>
+<form>
+  <label>Maximum Dollar Amount:</label>
+  <input type="number" name="maxAmount" />
+  <input type="submit" value="Submit" />
+</form>
+<% if (typeof maxAmount != 'undefined') { %>
+  <h2>Campgrounds with Prices Less Than or Equal to <%= maxAmount %></h2>
+  <ul>
+    <% for (var i = 0; i < campgrounds.length; i++) {
+      var campground = campgrounds[i];
+      if (campground.price <= maxAmount) { %>
+        <li><%= campground.name %> - $<%= campground.price %></li>
+      <% } %>
+    <% } %>
+  </ul>
+<% } %>

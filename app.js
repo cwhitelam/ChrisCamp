@@ -54,6 +54,12 @@ app.get('/campgrounds/:id/edit', catchAsync(async (req, res) => {
     res.render('campgrounds/edit', { campground });
 }))
 
+app.get('/campgrounds/:id', catchAsync(async (req, res,) => {
+    res.setHeader('Content-Type', 'text/plain');
+    res.statusCode = 200;
+    res.send('Hello World');
+}));
+
 app.put('/campgrounds/:id', catchAsync(async (req, res) => {
     const { id } = req.params;
     const campground = await Campground.findByIdAndUpdate(id, { ...req.body.campground });
@@ -74,7 +80,7 @@ app.use((err, req, res, next) => {
     const {statusCode = 500, message = 'Something went wrong'} = err;
     res.status(statusCode).send(message);
     res.send('Oh boy, something went wrong!')
-  })
+})
 
 app.listen(3000, () => {
     console.log('Serving on port 3000!!')
