@@ -2,13 +2,11 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
+const Joi = require('joi');
 const catchAsync = require('./utils/catchAsync');
 const ExpressError = require('./utils/ExpressError');
 const methodOverride = require('method-override');
 const Campground = require('./models/campground');
-const { ifError } = require('assert');
-const { error } = require('console');
-
 
 mongoose.connect('mongodb://localhost:27017/chris-camp', {
 });
@@ -50,7 +48,8 @@ app.get('/campgrounds/search', async (req, res) => {
 });
 
 app.post('/campgrounds', catchAsync(async (req, res, next) => {
-    if(!req.body.campground) throw new ExpressError('Invalid Campground Data', 400);
+    // if(!req.body.campground) throw new ExpressError('Invalid Campground Data', 400);
+    const campgroundSchema
     const campground = new Campground(req.body.campground);
     await campground.save();
     res.redirect(`/campgrounds/${campground.id}`);
